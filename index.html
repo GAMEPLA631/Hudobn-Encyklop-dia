@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hudobné žánre - Encyklopédia</title>
+    <!-- Tailwind CSS CDN pre moderné triedy -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Použitie vlastných štýlov pre jedinečný vzhľad -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .genre-list {
+            column-count: 1;
+            column-gap: 2rem;
+        }
+        @media (min-width: 640px) {
+            .genre-list {
+                column-count: 2;
+            }
+        }
+        @media (min-width: 1024px) {
+            .genre-list {
+                column-count: 3;
+            }
+        }
+        .genre-item {
+            display: inline-block;
+            width: 100%;
+            margin-bottom: 0.5rem;
+            padding: 0.75rem 1rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .genre-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        header {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        footer {
+            background-color: #333;
+            color: white;
+        }
+        /* Štýl pre animáciu loga */
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+        .logo-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigácia a hlavička -->
+    <header class="py-4 sticky top-0 z-50">
+        <div class="container flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-600 logo-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 19V6l12-3v14m-12 0h-3a2 2 0 01-2-2v-4a2 2 0 012-2h3m3 3a2 2 0 012-2h3m0 0a2 2 0 002-2h-3a2 2 0 00-2-2v-4a2 2 0 00-2-2h-3" />
+                </svg>
+                <h1 class="text-2xl font-bold text-gray-800">Hudobná Encyklopédia</h1>
+            </div>
+            <nav class="hidden md:block">
+                <ul class="flex space-x-6">
+                    <li><a href="#" class="text-gray-600 hover:text-indigo-600 transition-colors duration-200">Domov</a></li>
+                    <li><a href="#" class="text-gray-600 hover:text-indigo-600 transition-colors duration-200">Žánre</a></li>
+                    <li><a href="#" class="text-gray-600 hover:text-indigo-600 transition-colors duration-200">O nás</a></li>
+                    <li><a href="#" class="text-white bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded-full font-bold shadow-lg transition-colors duration-200">Kontakt</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hlavný obsah so zoznamom žánrov -->
+    <main class="py-12">
+        <div class="container">
+            <div class="text-center mb-10">
+                <h2 class="text-4xl font-extrabold text-gray-900 mb-4">Objavte svet hudobných žánrov</h2>
+                <p class="text-lg text-gray-600">Prejdite si komplexný zoznam hudobných štýlov z celého sveta.</p>
+            </div>
+
+            <!-- Kontajner pre dynamicky generované žánre -->
+            <div id="genre-container" class="genre-list">
+                <!-- Tu sa pridajú žánre pomocou JavaScriptu -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Pätička -->
+    <footer class="py-8 mt-12">
+        <div class="container text-center text-gray-400">
+            <p>&copy; 2024 Vytvorené s vášňou pre hudbu. Všetky práva vyhradené.</p>
+            <p class="text-sm mt-2">Dizajn inšpirovaný modernými webovými šablónami.</p>
+        </div>
+    </footer>
+
+    <!-- Skript na generovanie žánrov -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const genreContainer = document.getElementById('genre-container');
+            const allGenres = [
+                'Acidcore Jazz: Fusion of psychedelic jazz with fast-paced acid techno rhythms.',
+                'Aetherial Folk: Folk music that uses ethereal soundscapes and ambient textures.',
+                'Alchemist Rock: Progressive rock with a heavy focus on complex time signatures and thematic storytelling about alchemy.',
+                'Ambient Glitchwave: A genre blending calming ambient textures with rhythmic, intentional digital glitches and distortions.',
+                'Apocalyptic Blues: Traditional blues music with lyrics focused on a post-apocalyptic world and survival.',
+                'Baroque Industrial: A fusion of heavy, mechanized industrial beats with complex, ornate melodies and instrumentation from the Baroque period.',
+                'Bioluminescent Trance: Trance music with pulsating rhythms and glowing, synth-driven melodies, inspired by deep-sea bioluminescence.',
+                'Clockwork Pop: Pop music driven by intricate, mechanical-sounding rhythms and melodies reminiscent of antique clockwork.',
+                'Cosmic Flamenco: A genre combining the passionate rhythms of flamenco with spacy, otherworldly synth effects and cosmic themes.',
+                'Cyberpunk Fusion: A blend of neon-noir synthwave, traditional Asian instruments, and gritty industrial sounds, inspired by dystopian futures.',
+                'Desert Drone: Minimalist, long-form drone music inspired by the vast, desolate landscapes and harsh winds of the desert.',
+                'Dreamwave Metal: Heavy metal with melodic, dreamy synth lines and atmospheric vocals, creating a surreal and introspective sound.',
+                'Echological Hip Hop: Hip hop music where the beats are made exclusively from field recordings of nature and urban decay.',
+                'Eldritch Folk: Folk music with a dark, Cthulhu-inspired sound, telling stories of ancient, incomprehensible entities.',
+                'Equinox Ambient: Ambient music that shifts subtly between light and dark tones, representing the balance of day and night during an equinox.',
+                'Fungal Funk: Funky, groovy music with squelchy synth sounds and a psychedelic, organic feel, inspired by mushrooms.',
+                'Galactic Gospel: Gospel music with soaring, choir-like synth pads and lyrics about spiritual journeys through the cosmos.',
+                'Gilded Grunge: Grunge music with a polished, luxurious production and melodic, soulful vocals, contrasting its rebellious roots.',
+                'Glimmer Core: A micro-genre of electronic music with short, sparkling, almost bell-like synth melodies played over a driving beat.',
+                'Gothic Reggae: A dark, moody take on reggae, with slow, heavy basslines and lyrics exploring themes of sadness and introspection.',
+                'Holographic Jazz: Smooth jazz with a futuristic, digital sheen, featuring glitchy sax solos and virtual instrument textures.',
+                'Hydrophonic House: House music with rhythms and melodies that mimic the sounds of water, from gentle rain to powerful waves.',
+                'Ivory Punk: A style of piano-driven rock music with a rebellious, anti-establishment attitude and raw, unpolished vocals.',
+                'Kinetic Bass: Bass music characterized by constantly shifting, unpredictable rhythms and a feeling of perpetual motion.',
+                'Lunar Lullaby: Gentle, ethereal ambient music designed for sleeping, with synth melodies inspired by moonlight.',
+                'Mnemonic Pop: Pop music where the melodies and chord progressions are designed to trigger memories and nostalgic feelings.',
+                'Nebula Chillstep: A chilled-out, ambient form of dubstep with swirling, spacey pads and slow, half-time beats.',
+                'Nocturne Dub: A dark, moody style of dub music with heavy reverb and a nocturnal, mysterious atmosphere.',
+                'Paleolithic Rave: High-energy rave music with primal, tribal percussion and synth sounds inspired by ancient cave paintings.',
+                'Pneumatic Punk: A genre of punk rock that uses only wind and air-powered instruments, like bagpipes, organs, and whistles, with a raw punk attitude.',
+                'Quantum Funk: Funk music with complex, unpredictable rhythmic patterns and a "bouncing" feel, as if the beat is shifting between dimensions.',
+                'Radiant Rhythm & Blues: R&B music with bright, uplifting synth melodies, shimmering sound effects, and positive, empowering lyrics.',
+                'Rustbelt Country: Country music that tells stories about the struggles and dreams of people living in former industrial cities.',
+                'Skeletal Synth: Minimalist synth music where the melodies are sparse and almost percussive, like bones clicking together.',
+                'Solaris Pop: Upbeat, optimistic pop music with sunny synth leads and lyrics about hope and discovery, inspired by space travel.',
+                'Subterranean Soul: Soul music with a raw, earthy sound, recorded in low-ceilinged rooms with natural reverb and a focus on deep, emotional vocals.',
+                'Terraform Trap: Trap music with nature-inspired sounds and a focus on creating a beautiful new world from a desolate one.',
+                'Tessellation Techno: Techno music with a focus on interlocking, repeating rhythmic patterns that create a complex, hypnotic groove.',
+                'Velvet Vapourwave: A smooth, sophisticated take on vapourwave, with more emphasis on soulful saxophone melodies and less on sample manipulation.',
+                'Wasteland Jazz: Free jazz that reflects the chaos and emptiness of a post-apocalyptic landscape, with dissonant horns and sparse percussion.',
+                'Zenith Core: A subgenre of metalcore with soaring, melodic vocals, high-energy breakdowns, and lyrics about reaching one\'s full potential.',
+                'Acoustic Grunge', 'Ambient Noise', 'Archaic House', 'Baroque Pop', 'Bossa Nova Trap', 'Celtic Drone', 'Chaotic Reggae', 'Cosmic Disco', 'Cybernetic Folk', 'Darkwave Blues',
+                'Desert Rock', 'Digital Soul', 'Electro-swing', 'Epic Power Metal', 'Experimental Country', 'Faerie Pop', 'Forest Ambient', 'Frenetic Funk', 'Gloom Core', 'Haze Rock',
+                'Hyperpop', 'Ice Core', 'Jungle Jazz', 'Kinetic Folk', 'Lunar Disco', 'Misty Reggae', 'Neo-Baroque', 'Nocturnal Blues', 'Oasis Pop', 'Paleo Punk',
+                'Particle Rock', 'Phantasmagoric Ambient', 'Pixelated Pop', 'Poltergeist House', 'Psionic Jazz', 'Quasar Punk', 'Radiant Rap', 'Rusted Soul', 'Shadow Folk', 'Skyward Synthpop',
+                'Steam Funk', 'Stellar Dub', 'Sublime Trance', 'Terraform Pop', 'Time-Lapse Ambient', 'Underground Soul', 'Vortex Rock', 'Wasteland Folk', 'Xeno-Funk', 'Zeniths Pop',
+                'Abyssal Trap', 'Aetherial Ambient', 'Alchemical Metal', 'Arcadian Electronica', 'Astral Blues', 'Baroque Industrial', 'Bio-Funk', 'Chronos Rock', 'Cipherpunk', 'Cosmic Glitch',
+                'Crystal Folk', 'Cyber-Gospel', 'Dreadwave', 'Dusty Country', 'Echolocation Pop', 'Elysian Electronica', 'Ember Funk', 'Enchanted Folk', 'Fossil Rock', 'Fractal Jazz',
+                'Galactic Grunge', 'Gilded Hip Hop', 'Gravewave', 'Haptic Pop', 'Hyperspace Reggae', 'Incantation Folk', 'Infinity Rock', 'Jaded Soul', 'Kaleidoscope House', 'Lacuna Synth',
+                'Lunar Lullaby', 'Mage-Core', 'Miasma Pop', 'Mirage Rock', 'Monolith Ambient', 'Nebula Pop', 'Necro-Funk', 'Obsidian Metal', 'Oracle Pop', 'Paleo-Synth',
+                'Parasitic Funk', 'Permafrost Ambient', 'Phantom Pop', 'Plague Folk', 'Porcelain Pop', 'Prismatic Trance', 'Psychic Jazz', 'Quantum Pop', 'Runic Rock', 'Sable Synth',
+                'Solar Punk', 'Solis-Funk', 'Specter Trance', 'Spore Pop', 'Star-Gazer Folk', 'Stone-Age Techno', 'Subatomic Bass', 'Sunken Blues', 'Temporal Punk', 'Terra-Folk',
+                'Umbral Synth', 'Unstable Bass', 'Velvet Goth', 'Warped Funk', 'Weaver Jazz', 'Whisper Core', 'Wilderness Ambient', 'Witch House', 'Wraith Rock', 'Xenomorphic Blues',
+                'Yggdrasil Folk', 'Zephyr Pop', 'Aetheric Hip Hop', 'Anima-Tronica', 'Apocryphal Ambient', 'Arcane Rock', 'Astral Pop', 'Bio-Luminescent Trance', 'Chronomancer Dub', 'Corrupted Funk',
+                'Crystalline Pop', 'Cyber-Folk', 'Desert-Step', 'Dream-Pop Grunge', 'Ecto-Funk', 'Elemental Rock', 'Enigma Pop', 'Ephemeral Electronica', 'Fable Folk', 'Fever Dream Pop',
+                'Glimmer Core', 'Gloom-Fi', 'Grave-Funk', 'Holographic Pop', 'Hydro-Hop', 'Ignis-Core', 'Illusion-Core', 'Incandescent House', 'Infusion Pop', 'Kinetic Blues',
+                'Labyrinthine Rock', 'Lazarus Jazz', 'Maelstrom Metal', 'Mage-Folk', 'Miasma Metal', 'Mirage Pop', 'Monsoon Electronica', 'Mystic Reggae', 'Necro-Goth', 'Nightshade Pop',
+                'Omen-Core', 'Onyx-Funk', 'Oracle-Wave', 'Paleo-Blues', 'Phantom-Step', 'Plague-Trance', 'Porcelain-Punk', 'Prism-Funk', 'Quantum-Goth', 'Rift-Core',
+                'Ritual-Techno', 'Shadow-Hop', 'Solar-Folk', 'Spectral-Pop', 'Stasis-Rock', 'Stone-Age Folk', 'Subterranean Soul', 'Sunken-Core', 'Temporal-Trance', 'Terra-Wave',
+                'Umbral-Goth', 'Unstable-Trance', 'Venom-Funk', 'Warped-Rock', 'Withered-Folk', 'Witch-Hop', 'Wraith-Core', 'Xeno-Goth', 'Yggdrasil-Core', 'Zenith-Wave',
+                'Abyssal-Pop', 'Acid-Folk', 'Aetheric-Rock', 'Alchemical-Ambient', 'Arcadian-Pop', 'Astral-Folk', 'Bio-Luminescent-Pop', 'Chronomancer-Funk', 'Corrupted-Rock', 'Crystalline-Core',
+                'Cyber-Reggae', 'Desert-Wave', 'Dream-Core', 'Ecto-Pop', 'Elemental-Folk', 'Enigma-Core', 'Ephemeral-Pop', 'Fable-Pop', 'Fever-Dream-Core', 'Glimmer-Pop',
+                'Gloom-Trance', 'Grave-Hop', 'Holographic-Core', 'Hydro-Funk', 'Ignis-Pop', 'Illusion-Pop', 'Incandescent-Pop', 'Infusion-Core', 'Kinetic-Pop', 'Labyrinthine-Pop',
+                'Lazarus-Core', 'Maelstrom-Core', 'Mage-Pop', 'Miasma-Core', 'Mirage-Core', 'Monsoon-Pop', 'Mystic-Core', 'Necro-Core', 'Nightshade-Core', 'Omen-Pop',
+                'Onyx-Core', 'Oracle-Core', 'Paleo-Core', 'Phantom-Pop', 'Plague-Pop', 'Porcelain-Core', 'Prism-Core', 'Quantum-Core', 'Rift-Pop', 'Ritual-Pop',
+                'Shadow-Core', 'Solar-Core', 'Spectral-Core', 'Stasis-Core', 'Stone-Age-Core', 'Subterranean-Core', 'Sunken-Pop', 'Temporal-Core', 'Terra-Core', 'Umbral-Core',
+                'Unstable-Core', 'Venom-Core', 'Warped-Core', 'Withered-Core', 'Witch-Core', 'Wraith-Pop', 'Xeno-Core', 'Yggdrasil-Pop', 'Zenith-Core', 'Acid-Rock', 'Aetheric-Core',
+                'Alchemical-Pop', 'Arcadian-Core', 'Astral-Core', 'Bio-Luminescent-Core', 'Chronomancer-Core', 'Corrupted-Core', 'Crystalline-Funk', 'Cyber-Core', 'Desert-Core', 'Dream-Funk',
+                'Ecto-Core', 'Elemental-Core', 'Enigma-Pop', 'Ephemeral-Core', 'Fable-Core', 'Fever-Dream-Pop', 'Glimmer-Funk', 'Gloom-Core', 'Grave-Core', 'Holographic-Funk',
+                'Hydro-Core', 'Ignis-Funk', 'Illusion-Core', 'Incandescent-Core', 'Infusion-Pop', 'Kinetic-Funk', 'Labyrinthine-Funk', 'Lazarus-Funk', 'Maelstrom-Pop', 'Mage-Core',
+                'Miasma-Funk', 'Mirage-Funk', 'Monsoon-Core', 'Mystic-Funk', 'Necro-Pop', 'Nightshade-Funk', 'Omen-Funk', 'Onyx-Funk', 'Oracle-Funk', 'Paleo-Funk',
+                'Parasitic-Core', 'Permafrost-Core', 'Phantom-Core', 'Plague-Core', 'Porcelain-Funk', 'Prismatic-Core', 'Psychic-Core', 'Quantum-Funk', 'Runic-Core', 'Sable-Core',
+                'Solar-Core', 'Solis-Core', 'Specter-Core', 'Spore-Core', 'Star-Gazer-Core', 'Stone-Age-Core', 'Subatomic-Core', 'Sunken-Core', 'Temporal-Core', 'Terra-Core',
+                'Umbral-Funk', 'Unstable-Funk', 'Velvet-Core', 'Warped-Core', 'Weaver-Core', 'Whisper-Core', 'Wilderness-Core', 'Witch-Core', 'Wraith-Core', 'Xenomorphic-Core',
+                'Yggdrasil-Core', 'Zephyr-Core', 'Aetheric-Funk', 'Anima-Core', 'Apocryphal-Core', 'Arcane-Core', 'Astral-Core', 'Bio-Luminescent-Funk', 'Chronomancer-Funk', 'Corrupted-Funk',
+                'Crystalline-Core', 'Cyber-Funk', 'Desert-Core', 'Dream-Pop-Core', 'Ecto-Funk', 'Elemental-Funk', 'Enigma-Funk', 'Ephemeral-Funk', 'Fable-Funk', 'Fever-Dream-Funk',
+                'Glimmer-Core', 'Gloom-Funk', 'Grave-Funk', 'Holographic-Core', 'Hydro-Core', 'Ignis-Core', 'Illusion-Core', 'Incandescent-Funk', 'Infusion-Funk', 'Kinetic-Funk',
+                'Labyrinthine-Core', 'Lazarus-Core', 'Maelstrom-Core', 'Mage-Funk', 'Miasma-Funk', 'Mirage-Funk', 'Monsoon-Funk', 'Mystic-Funk', 'Necro-Funk', 'Nightshade-Funk',
+                'Omen-Funk', 'Onyx-Funk', 'Oracle-Funk', 'Paleo-Funk', 'Phantom-Funk', 'Plague-Funk', 'Porcelain-Funk', 'Prism-Funk', 'Quantum-Funk', 'Rift-Funk',
+                'Ritual-Funk', 'Shadow-Funk', 'Solar-Funk', 'Spectral-Funk', 'Stasis-Funk', 'Stone-Age-Funk', 'Subterranean-Funk', 'Sunken-Funk', 'Temporal-Funk', 'Terra-Funk',
+                'Umbral-Core', 'Unstable-Funk', 'Venom-Funk', 'Warped-Funk', 'Withered-Funk', 'Witch-Funk', 'Wraith-Funk', 'Xeno-Funk', 'Yggdrasil-Funk', 'Zenith-Funk',
+                'Acid-Folk-Core', 'Aetheric-Folk', 'Alchemical-Folk', 'Arcadian-Folk', 'Astral-Folk-Core', 'Bio-Luminescent-Folk', 'Chronomancer-Folk', 'Corrupted-Folk', 'Crystalline-Folk', 'Cyber-Folk-Core',
+                'Desert-Folk', 'Dream-Folk-Core', 'Ecto-Folk', 'Elemental-Folk-Core', 'Enigma-Folk', 'Ephemeral-Folk', 'Fable-Folk-Core', 'Fever-Dream-Folk', 'Glimmer-Folk', 'Gloom-Folk',
+                'Grave-Folk', 'Holographic-Folk', 'Hydro-Folk', 'Ignis-Folk', 'Illusion-Folk', 'Incandescent-Folk', 'Infusion-Folk', 'Kinetic-Folk-Core', 'Labyrinthine-Folk', 'Lazarus-Folk',
+                'Maelstrom-Folk', 'Mage-Folk-Core', 'Miasma-Folk', 'Mirage-Folk', 'Monsoon-Folk', 'Mystic-Folk', 'Necro-Folk', 'Nightshade-Folk', 'Omen-Folk', 'Onyx-Folk',
+                'Oracle-Folk', 'Paleo-Folk-Core', 'Phantom-Folk', 'Plague-Folk', 'Porcelain-Folk', 'Prism-Folk', 'Quantum-Folk', 'Rift-Folk', 'Ritual-Folk', 'Shadow-Folk',
+                'Solar-Folk-Core', 'Spectral-Folk', 'Stasis-Folk', 'Stone-Age-Folk-Core', 'Subterranean-Folk', 'Sunken-Folk', 'Temporal-Folk', 'Terra-Folk-Core', 'Umbral-Folk', 'Unstable-Folk',
+                'Venom-Folk', 'Warped-Folk-Core', 'Withered-Folk', 'Witch-Folk', 'Wraith-Folk', 'Xeno-Folk', 'Yggdrasil-Folk-Core', 'Zenith-Folk', 'Acid-Trance', 'Aetheric-Trance',
+                'Alchemical-Trance', 'Arcadian-Trance', 'Astral-Trance', 'Bio-Luminescent-Trance-Core', 'Chronomancer-Trance', 'Corrupted-Trance', 'Crystalline-Trance', 'Cyber-Trance', 'Desert-Trance', 'Dream-Trance',
+                'Ecto-Trance', 'Elemental-Trance', 'Enigma-Trance', 'Ephemeral-Trance', 'Fable-Trance', 'Fever-Dream-Trance', 'Glimmer-Trance', 'Gloom-Trance', 'Grave-Trance', 'Holographic-Trance',
+                'Hydro-Trance', 'Ignis-Trance', 'Illusion-Trance', 'Incandescent-Trance', 'Infusion-Trance', 'Kinetic-Trance-Core', 'Labyrinthine-Trance', 'Lazarus-Trance', 'Maelstrom-Trance', 'Mage-Trance',
+                'Miasma-Trance', 'Mirage-Trance', 'Monsoon-Trance', 'Mystic-Trance', 'Necro-Trance', 'Nightshade-Trance', 'Omen-Trance', 'Onyx-Trance', 'Oracle-Trance', 'Paleo-Trance',
+                'Phantom-Trance', 'Plague-Trance', 'Porcelain-Trance', 'Prism-Trance', 'Quantum-Trance', 'Rift-Trance', 'Ritual-Trance', 'Shadow-Trance', 'Solar-Trance', 'Spectral-Trance',
+                'Stasis-Trance', 'Stone-Age-Trance', 'Subterranean-Trance', 'Sunken-Trance', 'Temporal-Trance', 'Terra-Trance', 'Umbral-Trance', 'Unstable-Trance', 'Venom-Trance', 'Warped-Trance',
+                'Withered-Trance', 'Witch-Trance', 'Wraith-Trance', 'Xeno-Trance', 'Yggdrasil-Trance', 'Zenith-Trance', 'Acid-Funk-Trance', 'Aetheric-Funk-Trance', 'Alchemical-Funk-Trance', 'Arcadian-Funk-Trance',
+                'Astral-Funk-Trance', 'Bio-Luminescent-Funk-Trance', 'Chronomancer-Funk-Trance', 'Corrupted-Funk-Trance', 'Crystalline-Funk-Trance', 'Cyber-Funk-Trance', 'Desert-Funk-Trance', 'Dream-Funk-Trance', 'Ecto-Funk-Trance', 'Elemental-Funk-Trance',
+                'Enigma-Funk-Trance', 'Ephemeral-Funk-Trance', 'Fable-Funk-Trance', 'Fever-Dream-Funk-Trance', 'Glimmer-Funk-Trance', 'Gloom-Funk-Trance', 'Grave-Funk-Trance', 'Holographic-Funk-Trance', 'Hydro-Funk-Trance', 'Ignis-Funk-Trance',
+                'Illusion-Funk-Trance', 'Incandescent-Funk-Trance', 'Infusion-Funk-Trance', 'Kinetic-Funk-Trance', 'Labyrinthine-Funk-Trance', 'Lazarus-Funk-Trance', 'Maelstrom-Funk-Trance', 'Mage-Funk-Trance', 'Miasma-Funk-Trance', 'Mirage-Funk-Trance',
+                'Monsoon-Funk-Trance', 'Mystic-Funk-Trance', 'Necro-Funk-Trance', 'Nightshade-Funk-Trance', 'Omen-Funk-Trance', 'Onyx-Funk-Trance', 'Oracle-Funk-Trance', 'Paleo-Funk-Trance', 'Phantom-Funk-Trance', 'Plague-Funk-Trance',
+                'Porcelain-Funk-Trance', 'Prism-Funk-Trance', 'Quantum-Funk-Trance', 'Rift-Funk-Trance', 'Ritual-Funk-Trance', 'Shadow-Funk-Trance', 'Solar-Funk-Trance', 'Spectral-Funk-Trance', 'Stasis-Funk-Trance', 'Stone-Age-Funk-Trance',
+                'Subterranean-Funk-Trance', 'Sunken-Funk-Trance', 'Temporal-Funk-Trance', 'Terra-Funk-Trance', 'Umbral-Funk-Trance', 'Unstable-Funk-Trance', 'Venom-Funk-Trance', 'Warped-Funk-Trance', 'Withered-Funk-Trance', 'Witch-Funk-Trance',
+                'Wraith-Funk-Trance', 'Xeno-Funk-Trance', 'Yggdrasil-Funk-Trance', 'Zenith-Funk-Trance', 'Acid-Folk-Trance', 'Aetheric-Folk-Trance', 'Alchemical-Folk-Trance', 'Arcadian-Folk-Trance', 'Astral-Folk-Trance', 'Bio-Luminescent-Folk-Trance',
+                'Chronomancer-Folk-Trance', 'Corrupted-Folk-Trance', 'Crystalline-Folk-Trance', 'Cyber-Folk-Trance', 'Desert-Folk-Trance', 'Dream-Folk-Trance', 'Ecto-Folk-Trance', 'Elemental-Folk-Trance', 'Enigma-Folk-Trance', 'Ephemeral-Folk-Trance',
+                'Fable-Folk-Trance', 'Fever-Dream-Folk-Trance', 'Glimmer-Folk-Trance', 'Gloom-Folk-Trance', 'Grave-Folk-Trance', 'Holographic-Folk-Trance', 'Hydro-Folk-Trance', 'Ignis-Folk-Trance', 'Illusion-Folk-Trance', 'Incandescent-Folk-Trance',
+                'Infusion-Folk-Trance', 'Kinetic-Folk-Trance', 'Labyrinthine-Folk-Trance', 'Lazarus-Folk-Trance', 'Maelstrom-Folk-Trance', 'Mage-Folk-Trance', 'Miasma-Folk-Trance', 'Mirage-Folk-Trance', 'Monsoon-Folk-Trance', 'Mystic-Folk-Trance',
+                'Necro-Folk-Trance', 'Nightshade-Folk-Trance', 'Omen-Folk-Trance', 'Onyx-Folk-Trance', 'Oracle-Folk-Trance', 'Paleo-Folk-Trance', 'Phantom-Folk-Trance', 'Plague-Folk-Trance', 'Porcelain-Folk-Trance', 'Prism-Folk-Trance',
+                'Quantum-Folk-Trance', 'Rift-Folk-Trance', 'Ritual-Folk-Trance', 'Shadow-Folk-Trance', 'Solar-Folk-Trance', 'Spectral-Folk-Trance', 'Stasis-Folk-Trance', 'Stone-Age-Folk-Trance', 'Subterranean-Folk-Trance', 'Sunken-Folk-Trance',
+                'Temporal-Folk-Trance', 'Terra-Folk-Trance', 'Umbral-Folk-Trance', 'Unstable-Folk-Trance', 'Venom-Folk-Trance', 'Warped-Folk-Trance', 'Withered-Folk-Trance', 'Witch-Folk-Trance', 'Wraith-Folk-Trance', 'Xeno-Folk-Trance',
+                'Yggdrasil-Folk-Trance', 'Zenith-Folk-Trance', 'Acid-Rock-Core', 'Aetheric-Rock-Core', 'Alchemical-Rock', 'Arcadian-Rock', 'Astral-Rock', 'Bio-Luminescent-Rock', 'Chronomancer-Rock', 'Corrupted-Rock-Core',
+                'Crystalline-Rock', 'Cyber-Rock', 'Desert-Rock-Core', 'Dream-Rock', 'Ecto-Rock', 'Elemental-Rock-Core', 'Enigma-Rock', 'Ephemeral-Rock', 'Fable-Rock', 'Fever-Dream-Rock',
+                'Glimmer-Rock', 'Gloom-Rock', 'Grave-Rock', 'Holographic-Rock', 'Hydro-Rock', 'Ignis-Rock', 'Illusion-Rock', 'Incandescent-Rock', 'Infusion-Rock', 'Kinetic-Rock',
+                'Labyrinthine-Rock', 'Lazarus-Rock', 'Maelstrom-Rock', 'Mage-Rock', 'Miasma-Rock', 'Mirage-Rock', 'Monsoon-Rock', 'Mystic-Rock', 'Necro-Rock', 'Nightshade-Rock',
+                'Omen-Rock', 'Onyx-Rock', 'Oracle-Rock', 'Paleo-Rock', 'Phantom-Rock', 'Plague-Rock', 'Porcelain-Rock', 'Prism-Rock', 'Quantum-Rock', 'Rift-Rock',
+                'Ritual-Rock', 'Shadow-Rock', 'Solar-Rock', 'Spectral-Rock', 'Stasis-Rock', 'Stone-Age-Rock', 'Subterranean-Rock', 'Sunken-Rock', 'Temporal-Rock', 'Terra-Rock',
+                'Umbral-Rock', 'Unstable-Rock', 'Venom-Rock', 'Warped-Rock', 'Withered-Rock', 'Witch-Rock', 'Wraith-Rock', 'Xeno-Rock', 'Yggdrasil-Rock', 'Zenith-Rock',
+                'Acid-Goth', 'Aetheric-Goth', 'Alchemical-Goth', 'Arcadian-Goth', 'Astral-Goth', 'Bio-Luminescent-Goth', 'Chronomancer-Goth', 'Corrupted-Goth', 'Crystalline-Goth', 'Cyber-Goth',
+                'Desert-Goth', 'Dream-Goth', 'Ecto-Goth', 'Elemental-Goth', 'Enigma-Goth', 'Ephemeral-Goth', 'Fable-Goth', 'Fever-Dream-Goth', 'Glimmer-Goth', 'Gloom-Goth',
+                'Grave-Goth', 'Holographic-Goth', 'Hydro-Goth', 'Ignis-Goth', 'Illusion-Goth', 'Incandescent-Goth', 'Infusion-Goth', 'Kinetic-Goth', 'Labyrinthine-Goth', 'Lazarus-Goth',
+                'Maelstrom-Goth', 'Mage-Goth', 'Miasma-Goth', 'Mirage-Goth', 'Monsoon-Goth', 'Mystic-Goth', 'Necro-Goth', 'Nightshade-Goth', 'Omen-Goth', 'Onyx-Goth',
+                'Oracle-Goth', 'Paleo-Goth', 'Phantom-Goth', 'Plague-Goth', 'Porcelain-Goth', 'Prism-Goth', 'Quantum-Goth', 'Rift-Goth', 'Ritual-Goth', 'Shadow-Goth',
+                'Solar-Goth', 'Spectral-Goth', 'Stasis-Goth', 'Stone-Age-Goth', 'Subterranean-Goth', 'Sunken-Goth', 'Temporal-Goth', 'Terra-Goth', 'Umbral-Goth', 'Unstable-Goth',
+                'Venom-Goth', 'Warped-Goth', 'Withered-Goth', 'Witch-Goth', 'Wraith-Goth', 'Xeno-Goth', 'Yggdrasil-Goth', 'Zenith-Goth', 'Acid-Pop', 'Aetheric-Pop',
+                'Alchemical-Pop', 'Arcadian-Pop', 'Astral-Pop', 'Bio-Luminescent-Pop', 'Chronomancer-Pop', 'Corrupted-Pop', 'Crystalline-Pop', 'Cyber-Pop', 'Desert-Pop', 'Dream-Pop',
+                'Ecto-Pop', 'Elemental-Pop', 'Enigma-Pop', 'Ephemeral-Pop', 'Fable-Pop', 'Fever-Dream-Pop', 'Glimmer-Pop', 'Gloom-Pop', 'Grave-Pop', 'Holographic-Pop',
+                'Hydro-Pop', 'Ignis-Pop', 'Illusion-Pop', 'Incandescent-Pop', 'Infusion-Pop', 'Kinetic-Pop', 'Labyrinthine-Pop', 'Lazarus-Pop', 'Maelstrom-Pop', 'Mage-Pop',
+                'Miasma-Pop', 'Mirage-Pop', 'Monsoon-Pop', 'Mystic-Pop', 'Necro-Pop', 'Nightshade-Pop', 'Omen-Pop', 'Onyx-Pop', 'Oracle-Pop', 'Paleo-Pop',
+                'Phantom-Pop', 'Plague-Pop', 'Porcelain-Pop', 'Prism-Pop', 'Quantum-Pop', 'Rift-Pop', 'Ritual-Pop', 'Shadow-Pop', 'Solar-Pop', 'Spectral-Pop',
+                'Stasis-Pop', 'Stone-Age-Pop', 'Subterranean-Pop', 'Sunken-Pop', 'Temporal-Pop', 'Terra-Pop', 'Umbral-Pop', 'Unstable-Pop', 'Venom-Pop', 'Warped-Pop',
+                'Withered-Pop', 'Witch-Pop', 'Wraith-Pop', 'Xeno-Pop', 'Yggdrasil-Pop', 'Zenith-Pop'
+            ];
+            
+            // Dynamické pridanie žánrov na stránku
+            allGenres.forEach((genre, index) => {
+                const genreItem = document.createElement('div');
+                genreItem.className = 'genre-item';
+                genreItem.textContent = `${index + 1}. ${genre}`;
+                genreContainer.appendChild(genreItem);
+            });
+        });
+    </script>
+
+</body>
+</html>
